@@ -210,10 +210,16 @@
 }
 
 .serialColumn {
-  width: 150px;
+  width: 80px;
   text-align: left;
   padding-left: 22px !important;
 }
+.viewColumn {
+  width: 250px;
+  text-align: left;
+  padding-left: 22px !important;
+}
+
 
 .viewCell {
   display: flex;

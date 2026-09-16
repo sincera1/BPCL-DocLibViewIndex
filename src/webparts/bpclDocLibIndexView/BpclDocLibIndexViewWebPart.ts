@@ -198,7 +198,12 @@ export default class BpclDocLibIndexViewWebPart
       this._libraryOptions.length === 0 &&
       !this._isLoadingLibraries
     ) {
-      this._loadDocumentLibraries();
+      this._loadDocumentLibraries().catch((error: unknown) => {
+            console.error(
+              'Error loading document library',
+              error
+            );
+          });
     }
 
     return {

@@ -46,7 +46,9 @@ export default class BpclDocLibIndexView
   }
 
   public componentDidMount(): void {
-    this.loadViews();
+    this.loadViews().catch((error: unknown) => {
+            console.error('Error loading views:',error );
+          });
   }
 
   public componentDidUpdate(
@@ -70,7 +72,9 @@ export default class BpclDocLibIndexView
         searchText: ''
       });
 
-      this.loadViews();
+     this.loadViews().catch((error: unknown) => {
+            console.error('Error loading views:', error);
+          });
     }
   }
 
@@ -200,39 +204,29 @@ export default class BpclDocLibIndexView
 
         {/* Main Card */}
         <div className={styles.mainCard}>
-
           {/* Header Section */}
           <div className={styles.headerSection}>
-
             <div className={styles.headerIcon}>
               <i
                 className="bi bi-folder2-open"
                 aria-hidden="true"
               />
             </div>
-
             <div className={styles.headerContent}>
-
               <h2 className={styles.title}>
                 Document Library Views
               </h2>
-
               {libraryName && (
                 <div className={styles.libraryName}>
                   Library:{' '}
                   <strong>{libraryName}</strong>
                 </div>
               )}
-
             </div>
-
           </div>
-
           <div className={styles.headerDivider} />
-
           {/* No Library Selected */}
           {!libraryName && !isLoading && (
-
             <div
               className="alert alert-info"
               role="alert"
@@ -242,56 +236,42 @@ export default class BpclDocLibIndexView
             </div>
 
           )}
-
           {/* Loading */}
           {isLoading && (
-
             <div className={styles.loadingContainer}>
-
               <div
                 className="spinner-border spinner-border-sm"
                 role="status"
                 aria-label="Loading"
               />
-
               <span className={styles.loadingText}>
                 Loading views...
               </span>
-
             </div>
-
           )}
 
           {/* Error */}
           {!isLoading && errorMessage && (
-
             <div
               className="alert alert-danger"
               role="alert"
             >
               {errorMessage}
             </div>
-
           )}
-
           {/* Search and Table */}
           {!isLoading &&
             !errorMessage &&
             libraryName &&
             views.length > 0 && (
-
             <>
-
               {/* Search Section */}
               <div className={styles.searchSection}>
-
                 <div className={styles.searchWrapper}>
-
                   <i
                     className={`bi bi-search ${styles.searchIcon}`}
                     aria-hidden="true"
                   />
-
                   <input
                     type="text"
                     className={styles.searchInput}
@@ -300,7 +280,6 @@ export default class BpclDocLibIndexView
                     onChange={this.handleSearchChange}
                     aria-label="Search document library views"
                   />
-
                   {searchText && (
 
                     <button
@@ -315,20 +294,16 @@ export default class BpclDocLibIndexView
                         aria-hidden="true"
                       />
                     </button>
-
                   )}
 
                 </div>
-
               </div>
 
               {/* Views Table */}
               {filteredViews.length > 0 ? (
 
                 <div className={styles.tableContainer}>
-
                   <div className="table-responsive">
-
                     <table
                       className={
                         `table table-hover align-middle mb-0 ` +
@@ -337,43 +312,28 @@ export default class BpclDocLibIndexView
                     >
 
                       <thead>
-
                         <tr>
-
-                          <th
-                            className={styles.serialColumn}
-                          >
+                          <th className={styles.serialColumn} >
                             Sr No
                           </th>
-
-                          <th>
+                          <th  className={styles.viewColumn}>
                             View
                           </th>
-
                         </tr>
-
                       </thead>
-
-                      <tbody>
+                  <tbody>
 
                         {filteredViews.map(
                           (
                             view: IDocumentLibraryView,
                             index: number
                           ) => (
-
                             <tr key={view.Id}>
-
-                              <td
-                                className={styles.serialColumn}
-                              >
+                              <td className={styles.serialColumn}>
                                 {index + 1}
                               </td>
-
                               <td>
-
                                 <div className={styles.viewCell}>
-
                                   <button
                                     type="button"
                                     className={styles.viewLink}
@@ -385,7 +345,7 @@ export default class BpclDocLibIndexView
                                     {view.Title}
                                   </button>
 
-                                  {view.DefaultView && (
+                                    {/* {view.DefaultView && (
 
                                     <span
                                       className={
@@ -395,25 +355,18 @@ export default class BpclDocLibIndexView
                                       Default
                                     </span>
 
-                                  )}
+                                  )} */}
 
                                 </div>
-
                               </td>
-
                             </tr>
-
                           )
                         )}
 
                       </tbody>
-
                     </table>
-
                   </div>
-
                 </div>
-
               ) : (
 
                 <div
@@ -424,19 +377,14 @@ export default class BpclDocLibIndexView
                     className="bi bi-search"
                     aria-hidden="true"
                   />
-
                   <div className={styles.noResultsTitle}>
                     No views found
                   </div>
-
                   <div className={styles.noResultsText}>
                     Try searching with a different view name.
                   </div>
-
                 </div>
-
               )}
-
             </>
 
           )}
@@ -454,13 +402,9 @@ export default class BpclDocLibIndexView
               No visible views found for this
               document library.
             </div>
-
           )}
-
         </div>
-
       </div>
-
     );
   }
 }
