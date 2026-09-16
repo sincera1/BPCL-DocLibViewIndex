@@ -1,0 +1,443 @@
+
+.bpclDocLibIndexView {
+  width: 100%;
+  padding: 6px 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: #1f2937;
+}
+
+.mainCard {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #e6ebf2;
+  border-radius: 12px;
+  padding: 28px 42px 32px;
+  box-sizing: border-box;
+  box-shadow: 0 2px 10px rgba(31, 55, 88, 0.04);
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.headerSection {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  min-height: 78px;
+}
+
+.headerIcon {
+  width: 80px;
+  height: 80px;
+  flex: 0 0 80px;
+  border-radius: 10px;
+  background: linear-gradient(
+    145deg,
+    #1478e8 0%,
+    #0666d6 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  box-shadow: 0 3px 8px rgba(0, 102, 214, 0.18);
+
+  i {
+    font-size: 38px;
+    line-height: 1;
+  }
+}
+
+.headerContent {
+  min-width: 0;
+}
+
+.title {
+  margin: 0 0 10px;
+  font-size: 30px;
+  line-height: 1.2;
+  font-weight: 600;
+  color: #172f50;
+  letter-spacing: -0.4px;
+}
+
+.libraryName {
+  font-size: 17px;
+  line-height: 1.5;
+  color: #334b69;
+
+  strong {
+    color: #172f50;
+    font-weight: 700;
+  }
+}
+
+.headerDivider {
+  height: 1px;
+  background: #dce4ee;
+  margin: 20px 0 22px;
+}
+
+/* =========================================
+   SEARCH
+========================================= */
+
+.searchSection {
+  width: 100%;
+  margin-bottom: 22px;
+}
+
+.searchWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 46px;
+  border: 1px solid #cbd9ea;
+  border-radius: 8px;
+  background: #ffffff;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.searchWrapper:focus-within {
+  border-color: #1478e8;
+  box-shadow: 0 0 0 3px rgba(20, 120, 232, 0.10);
+}
+
+.searchIcon {
+  position: absolute;
+  left: 15px;
+  color: #60758f;
+  font-size: 18px;
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 0 45px 0 46px;
+  font-family: inherit;
+  font-size: 16px;
+  color: #243b53;
+  box-sizing: border-box;
+}
+
+.searchInput::placeholder {
+  color: #8393a8;
+  opacity: 1;
+}
+
+.clearButton {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 25px;
+  height: 25px;
+  border: none;
+  background: transparent;
+  color: #8a9aae;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font-size: 15px;
+}
+
+.clearButton:hover {
+  color: #1769c2;
+}
+
+.clearButton:focus-visible,
+.viewLink:focus-visible {
+  outline: 2px solid #1478e8;
+  outline-offset: 3px;
+}
+
+/* =========================================
+   TABLE
+========================================= */
+
+.tableContainer {
+  width: 100%;
+  border: 1px solid #dce5f0;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.viewsTable {
+  width: 100%;
+  margin: 0;
+  border-collapse: collapse;
+  font-size: 16px;
+  color: #243b53;
+  table-layout: fixed;
+
+  thead th {
+    background: #f0f5fb;
+    color: #263b55;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 14px 22px;
+    border-bottom: 1px solid #dce5f0;
+    vertical-align: middle;
+  }
+
+  tbody td {
+    padding: 8px 22px;
+    height: 35px;
+    border-bottom: 1px solid #e5ebf3;
+    vertical-align: middle;
+    background: #ffffff;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  tbody tr:hover td {
+    background: #f7faff;
+  }
+}
+
+.serialColumn {
+  width: 150px;
+  text-align: left;
+  padding-left: 22px !important;
+}
+
+.viewCell {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  min-width: 0;
+}
+
+.viewLink {
+  display: inline-block;
+  border: none;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  color: #0066d6;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: left;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+
+.viewLink:hover {
+  color: #004a9f;
+}
+
+/* =========================================
+   DEFAULT BADGE
+========================================= */
+
+.defaultBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 27px;
+  padding: 3px 12px;
+  border-radius: 20px;
+  background: #dff4e8;
+  color: #197344;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+/* =========================================
+   LOADING
+========================================= */
+
+.loadingContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 130px;
+  color: #536b85;
+}
+
+.loadingText {
+  font-size: 15px;
+}
+
+/* =========================================
+   NO RESULTS
+========================================= */
+
+.noResultsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 180px;
+  padding: 30px 20px;
+  border: 1px solid #e1e9f2;
+  border-radius: 10px;
+  background: #f9fbfe;
+  color: #71849b;
+
+  i {
+    font-size: 28px;
+    margin-bottom: 12px;
+    color: #8ba0b8;
+  }
+}
+
+.noResultsTitle {
+  font-size: 17px;
+  font-weight: 600;
+  color: #344b65;
+  margin-bottom: 5px;
+}
+
+.noResultsText {
+  font-size: 14px;
+  color: #71849b;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 768px) {
+
+  .mainCard {
+    padding: 22px 20px 24px;
+    border-radius: 10px;
+  }
+
+  .headerSection {
+    gap: 15px;
+  }
+
+  .headerIcon {
+    width: 62px;
+    height: 62px;
+    flex-basis: 62px;
+
+    i {
+      font-size: 29px;
+    }
+  }
+
+  .title {
+    font-size: 23px;
+  }
+
+  .libraryName {
+    font-size: 15px;
+  }
+
+  .headerDivider {
+    margin: 18px 0 20px;
+  }
+
+  .viewsTable {
+    font-size: 14px;
+
+    thead th {
+      font-size: 14px;
+      padding: 12px 14px;
+    }
+
+    tbody td {
+      padding: 9px 14px;
+    }
+  }
+
+  .serialColumn {
+    width: 75px;
+    padding-left: 14px !important;
+  }
+
+  .viewLink {
+    font-size: 14px;
+  }
+
+  .defaultBadge {
+    font-size: 11px;
+    min-height: 23px;
+    padding: 3px 9px;
+  }
+
+  .viewCell {
+    gap: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .bpclDocLibIndexView {
+    padding: 0;
+  }
+
+  .mainCard {
+    padding: 18px 12px 20px;
+    border-radius: 8px;
+  }
+
+  .headerSection {
+    gap: 12px;
+  }
+
+  .headerIcon {
+    width: 50px;
+    height: 50px;
+    flex-basis: 50px;
+
+    i {
+      font-size: 24px;
+    }
+  }
+
+  .title {
+    font-size: 20px;
+    margin-bottom: 6px;
+  }
+
+  .libraryName {
+    font-size: 13px;
+  }
+
+  .searchInput {
+    font-size: 14px;
+  }
+
+  .viewsTable {
+    thead th {
+      padding: 11px 10px;
+    }
+
+    tbody td {
+      padding: 9px 10px;
+    }
+  }
+
+  .serialColumn {
+    width: 55px;
+    padding-left: 10px !important;
+  }
+}

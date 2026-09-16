@@ -1,0 +1,18 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.2",
+    "sdksVersions": {},
+    "version": "1.21.1",
+    "libraryName": "bpcl-document-library-index-view",
+    "libraryId": "ac799575-256a-499b-89e5-712cbd6c70d5",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "bpcl-document-library-index-view",
+    "solutionShortDescription": "bpcl-document-library-index-view description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "bpcl-doc-lib-index-view-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/bpclDocLibIndexView/BpclDocLibIndexViewWebPart.js",
+          "manifest": "./src/webparts/bpclDocLibIndexView/BpclDocLibIndexViewWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "BpclDocLibIndexViewWebPartStrings": "lib/webparts/bpclDocLibIndexView/loc/{locale}.js"
+  }
+}

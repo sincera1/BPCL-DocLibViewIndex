@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "bpcl-document-library-index-view-client-side-solution",
+    "id": "ac799575-256a-499b-89e5-712cbd6c70d5",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.21.1"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "bpcl-document-library-index-view description"
+      },
+      "longDescription": {
+        "default": "bpcl-document-library-index-view description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "bpcl-document-library-index-view Feature",
+        "description": "The feature that activates elements of the bpcl-document-library-index-view solution.",
+        "id": "c5c125ea-511b-4431-a1d8-4077d0b73a76",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/bpcl-document-library-index-view.sppkg"
+  }
+}
