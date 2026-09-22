@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@fluentui/react": "^8.106.4",
+    "@fontsource/inter": "^5.3.0",
     "@microsoft/sp-component-base": "1.21.1",
     "@microsoft/sp-core-library": "1.21.1",
     "@microsoft/sp-lodash-subset": "1.21.1",
@@ -20,7 +21,9 @@
     "@microsoft/sp-property-pane": "1.21.1",
     "@microsoft/sp-webpart-base": "1.21.1",
     "bootstrap": "^5.3.8",
+    "bootstrap-icons": "^1.13.1",
     "react": "17.0.1",
+    "react-bootstrap": "^2.10.10",
     "react-dom": "17.0.1",
     "tslib": "2.3.1"
   },

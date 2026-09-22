@@ -1,8 +1,8 @@
 
 import * as React from 'react';
-
 import styles from './BpclDocLibIndexView.module.scss';
-
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import {
   IBpclDocLibIndexViewProps
 } from './IBpclDocLibIndexViewProps';
@@ -10,6 +10,7 @@ import {
 import DocumentLibraryViewService, {
   IDocumentLibraryView
 } from '../services/DocumentLibraryViewService';
+import { Form, Card, Pagination } from 'react-bootstrap';
 
 export interface IBpclDocLibIndexViewState {
   views: IDocumentLibraryView[];
@@ -202,10 +203,34 @@ export default class BpclDocLibIndexView
 
       <div className={styles.bpclDocLibIndexView}>
 
+         <div className={styles.pageContainer}>
+        <div className={styles.banner}>
+          <div className={styles.bannerIcon}>
+            <i className="bi bi-folder2-open" />
+          </div>
+
+          <div>
+            <h3>Document Library Views</h3>
+            
+
+           {libraryName && (
+  <p>
+    Library :{' '}
+    <strong>{libraryName}</strong>
+  </p>
+)}
+          </div>
+        </div>
+      </div>
+
+      
+
         {/* Main Card */}
-        <div className={styles.mainCard}>
+         <div className={styles.cardContainer}>
+        <Card className={styles.listCard}>
+          <Card.Body className="p-4">
           {/* Header Section */}
-          <div className={styles.headerSection}>
+          {/* <div className={styles.headerSection}>
             <div className={styles.headerIcon}>
               <i
                 className="bi bi-folder2-open"
@@ -223,8 +248,9 @@ export default class BpclDocLibIndexView
                 </div>
               )}
             </div>
-          </div>
-          <div className={styles.headerDivider} />
+          </div> */}
+          {/* <div className={styles.headerDivider} /> */}
+          
           {/* No Library Selected */}
           {!libraryName && !isLoading && (
             <div
@@ -266,6 +292,9 @@ export default class BpclDocLibIndexView
             views.length > 0 && (
             <>
               {/* Search Section */}
+                <Form.Label className={styles.searchLabel}>
+    Search
+  </Form.Label>
               <div className={styles.searchSection}>
                 <div className={styles.searchWrapper}>
                   <i
@@ -367,6 +396,7 @@ export default class BpclDocLibIndexView
                     </table>
                   </div>
                 </div>
+                
               ) : (
 
                 <div
@@ -403,6 +433,37 @@ export default class BpclDocLibIndexView
               document library.
             </div>
           )}
+
+            <div className={`${styles.paginationSection} mt-3`}>
+
+            <div className={styles.leftPagination}>
+
+              <span className={styles.pageInfo}>
+                Page 1 of 132
+              </span>
+
+              <Form.Select className={styles.pageSize}>
+                <option>10 per page</option>
+                <option>20 per page</option>
+                <option>50 per page</option>
+              </Form.Select>
+
+            </div>
+
+            <Pagination className="mb-0 justify-content-end flex-wrap">
+              <Pagination.First />
+              <Pagination.Prev />
+              <Pagination.Item active>1</Pagination.Item>
+              <Pagination.Item>2</Pagination.Item>
+              <Pagination.Item>3</Pagination.Item>
+              <Pagination.Next />
+              <Pagination.Last />
+            </Pagination>
+
+          </div>
+        
+        </Card.Body>
+        </Card>
         </div>
       </div>
     );
