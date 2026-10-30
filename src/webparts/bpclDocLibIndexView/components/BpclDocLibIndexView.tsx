@@ -1,8 +1,8 @@
 
 import * as React from 'react';
-
 import styles from './BpclDocLibIndexView.module.scss';
-
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import {
   IBpclDocLibIndexViewProps
 } from './IBpclDocLibIndexViewProps';
@@ -10,12 +10,15 @@ import {
 import DocumentLibraryViewService, {
   IDocumentLibraryView
 } from '../services/DocumentLibraryViewService';
+import { Form, Card, Pagination } from 'react-bootstrap';
 
 export interface IBpclDocLibIndexViewState {
   views: IDocumentLibraryView[];
   isLoading: boolean;
   errorMessage: string;
   searchText: string;
+    currentPage: number;
+  pageSize: number;
 }
 
 export default class BpclDocLibIndexView
@@ -31,11 +34,13 @@ export default class BpclDocLibIndexView
   ) {
     super(props);
 
-    this.state = {
+   this.state = {
       views: [],
       isLoading: false,
       errorMessage: '',
-      searchText: ''
+      searchText: '',
+      currentPage: 1,
+      pageSize: 10
     };
 
     this._viewService =
@@ -135,24 +140,47 @@ export default class BpclDocLibIndexView
   /**
    * Update search text.
    */
-  private handleSearchChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ): void => {
+  // private handleSearchChange = (
+  //   event: React.ChangeEvent<HTMLInputElement>
+  // ): void => {
 
-    this.setState({
-      searchText: event.target.value
-    });
-  };
+  //   this.setState({
+  //     searchText: event.target.value
+  //   });
+  // };
+
+  private handleSearchChange = (
+  event: React.ChangeEvent<HTMLInputElement>
+): void => {
+
+  this.setState({
+    searchText: event.target.value,
+    currentPage: 1
+  });
+};
 
   /**
    * Clear search text.
    */
+  // private clearSearch = (): void => {
+  //   this.setState({
+  //     searchText: ''
+  //   });
+  // };
+  // pagination handle code
   private clearSearch = (): void => {
-    this.setState({
-      searchText: ''
-    });
-  };
-
+  this.setState({
+    searchText: '',
+    currentPage: 1
+  });
+};
+  
+  
+  private handlePageChange = (page: number): void => {
+  this.setState({
+    currentPage: page
+  });
+};
   /**
    * Open selected view in a new tab.
    */
@@ -198,14 +226,54 @@ export default class BpclDocLibIndexView
             .indexOf(searchText.trim().toLowerCase()) !== -1
       );
 
+      // page code
+      const totalPages: number = Math.ceil(
+        filteredViews.length / this.state.pageSize
+      );
+
+      const startIndex: number =
+        (this.state.currentPage - 1) * this.state.pageSize;
+
+      const paginatedViews: IDocumentLibraryView[] =
+        filteredViews.slice(
+          startIndex,
+          startIndex + this.state.pageSize
+        );
+
+  //
+
     return (
 
       <div className={styles.bpclDocLibIndexView}>
 
+         <div className={styles.pageContainer}>
+        <div className={styles.banner}>
+          <div className={styles.bannerIcon}>
+            <i className="bi bi-folder2-open" />
+          </div>
+
+          <div>
+            <h3>Document Library Views</h3>
+            
+
+           {libraryName && (
+  <p>
+    Library :{' '}
+    <strong>{libraryName}</strong>
+  </p>
+)}
+          </div>
+        </div>
+      </div>
+
+      
+
         {/* Main Card */}
-        <div className={styles.mainCard}>
+         <div className={styles.cardContainer}>
+        <Card className={styles.listCard}>
+          <Card.Body className="p-4">
           {/* Header Section */}
-          <div className={styles.headerSection}>
+          {/* <div className={styles.headerSection}>
             <div className={styles.headerIcon}>
               <i
                 className="bi bi-folder2-open"
@@ -223,8 +291,9 @@ export default class BpclDocLibIndexView
                 </div>
               )}
             </div>
-          </div>
-          <div className={styles.headerDivider} />
+          </div> */}
+          {/* <div className={styles.headerDivider} /> */}
+          
           {/* No Library Selected */}
           {!libraryName && !isLoading && (
             <div
@@ -266,6 +335,9 @@ export default class BpclDocLibIndexView
             views.length > 0 && (
             <>
               {/* Search Section */}
+                <Form.Label className={styles.searchLabel}>
+    Search
+  </Form.Label>
               <div className={styles.searchSection}>
                 <div className={styles.searchWrapper}>
                   <i
@@ -323,14 +395,14 @@ export default class BpclDocLibIndexView
                       </thead>
                   <tbody>
 
-                        {filteredViews.map(
+                        {paginatedViews.map(
                           (
                             view: IDocumentLibraryView,
                             index: number
                           ) => (
                             <tr key={view.Id}>
                               <td className={styles.serialColumn}>
-                                {index + 1}
+                                {startIndex + index + 1}
                               </td>
                               <td>
                                 <div className={styles.viewCell}>
@@ -367,6 +439,7 @@ export default class BpclDocLibIndexView
                     </table>
                   </div>
                 </div>
+                
               ) : (
 
                 <div
@@ -403,6 +476,104 @@ export default class BpclDocLibIndexView
               document library.
             </div>
           )}
+
+ {filteredViews.length > 0 && (
+      <div className={`${styles.paginationSection} mt-3`}>
+
+        <div className={styles.leftPagination}>
+
+          <span className={styles.pageInfo}>
+            Page {this.state.currentPage} of {totalPages}
+          </span>
+
+          <Form.Select
+            className={styles.pageSize}
+            value={this.state.pageSize}
+            onChange={(event) => {
+              this.setState({
+                pageSize: Number(event.target.value),
+                currentPage: 1
+              });
+            }}
+          >
+            <option value="10">10 per page</option>
+            <option value="20">20 per page</option>
+            <option value="50">50 per page</option>
+          </Form.Select>
+
+        </div>
+
+        {totalPages > 1 && (
+
+          <Pagination className="mb-0 justify-content-end flex-wrap">
+
+            <Pagination.First
+              disabled={this.state.currentPage === 1}
+              onClick={() => this.handlePageChange(1)}
+            />
+
+            <Pagination.Prev
+              disabled={this.state.currentPage === 1}
+              onClick={() =>
+                this.handlePageChange(
+                  this.state.currentPage - 1
+                )
+              }
+            />
+
+            {(() => {
+              const pageItems: React.ReactElement[] = [];
+
+              for (
+                let page: number = 1;
+                page <= totalPages;
+                page++
+              ) {
+                pageItems.push(
+                  <Pagination.Item
+                    key={page}
+                    active={page === this.state.currentPage}
+                    onClick={() =>
+                      this.handlePageChange(page)
+                    }
+                  >
+                    {page}
+                  </Pagination.Item>
+                );
+              }
+
+              return pageItems;
+            })()}
+
+            <Pagination.Next
+              disabled={
+                this.state.currentPage === totalPages
+              }
+              onClick={() =>
+                this.handlePageChange(
+                  this.state.currentPage + 1
+                )
+              }
+            />
+
+            <Pagination.Last
+              disabled={
+                this.state.currentPage === totalPages
+              }
+              onClick={() =>
+                this.handlePageChange(totalPages)
+              }
+            />
+
+          </Pagination>
+
+        )}
+
+      </div>
+
+    )}      
+        </Card.Body>
+        </Card>
         </div>
       </div>
     );
